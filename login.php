@@ -1,4 +1,16 @@
-<?php require 'inc/head.php'; ?>
+<?php require 'inc/head.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['loginname'])) {
+        $userName = $_POST['loginname'];
+        if ($userName) {
+            $_SESSION['loginname'] = $userName;
+            header('Location:index.php');
+        }
+    }
+} 
+?>
+
+<?php if (empty($_SESSION['loginname'])) { ?>
 <div class="container" style="margin-top:40px">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -7,7 +19,7 @@
                     <strong> Sign in to continue</strong>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="#" method="POST">
+                    <form role="form" action="" method="POST">
                         <fieldset>
                             <div class="row">
                                 <div class="center-block">
@@ -42,4 +54,8 @@
         </div>
     </div>
 </div>
+<?php } else {
+    header('Location:index.php');
+}
+?>
 <?php require 'inc/foot.php'; ?>

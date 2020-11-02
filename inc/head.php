@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST['deconnexion'])) {
+        $_SESSION = array();
+        session_destroy();
+        unset($_SESSION);
+    }
+} 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,11 +54,21 @@
                             Cart
                         </a>
                     </li>
+                    <?php if (isset($_SESSION['loginname'])) {?>
+                    <form method="post">
+                    <li>
+                        <input type="text" class="d-none" name="deconnexion" value="deconnexion">
+                        <button type="submit" class="btn btn-primary">Se deconnecter</a>
+                    </li>
+                    </form>
+                    <?php } ?>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
     <div class="container-fluid text-right">
-        <strong>Hello Wilder !</strong>
+    <?php if (isset($_SESSION['loginname'])){ ?>
+        <strong>Hello <?= $_SESSION['loginname'] ?> !</strong>
+    <?php } ?>
     </div>
 </header>
