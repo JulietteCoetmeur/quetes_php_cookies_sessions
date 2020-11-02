@@ -1,40 +1,47 @@
 <?php 
 require 'inc/data/products.php';
 require 'inc/head.php'; 
+require_once 'functions.php';
+
 if (empty($_SESSION['loginname'])) {
     header('Location:login.php');
 }
 
-$panier = null;
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (!empty($_GET['article']) && !empty($_GET['description'])) {
-        $panier = [
-            'article' => $_GET['article'],
-            'description' => $_GET['description']
-        ];
-        if ($panier) {
-            $_SESSION['cart'] = $panier;
-        }
-    }
-} 
+if (!empty($_GET['add_to_cart'])) {
+    $cookie = $_GET['add_to_cart'];
+    addArticle($cookie);
+}
+
+// $panier = null;
+// if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+//     if (!empty($_GET['article']) && !empty($_GET['description'])) {
+//         $panier = [
+//             'article' => $_GET['article'],
+//             'description' => $_GET['description']
+//         ];
+//         if ($panier) {
+//             $_SESSION['cart'] = $panier;
+//         }
+//     }
+// } 
 ?>
 
 <section class="cookies container-fluid">
     <div class="row">
         <?php foreach ($catalog as $id => $cookie) { ?>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <form method="GET">
-                    <figure class="thumbnail text-center">
-                        <img src="assets/img/product-<?= $id; ?>.jpg" alt="<?= $cookie['name']; ?>" class="img-responsive">
-                        <figcaption class="caption">
-                            <h3><?= $cookie['name']; ?></h3>
-                            <input type="text" class="d-none" name="article" value="<?= $cookie['name']; ?>">
-                            <p><?= $cookie['description']; ?></p>
-                            <input type="text" class="d-none" name="description" value="<?= $cookie['description']; ?>">
-                            <button type="submit" class="btn btn-primary">Add</a>
-                        </figcaption>
-                    </figure>
-                </form>
+                <figure class="thumbnail text-center">
+                    <img src="assets/img/product-<?= $id; ?>.jpg" alt="<?= $cookie['name']; ?>" class="img-responsive">
+                    <figcaption class="caption">
+                        <h3><?= $cookie['name']; ?></h3>
+                        <p><?= $cookie['description']; ?></p>
+                        <form method="get">
+                        <a href="?add_to_cart=<?= $id; ?>" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add to cart
+                        </a>
+                        </form>
+                    </figcaption>
+                </figure>
             </div>
         <?php } ?>
     </div>

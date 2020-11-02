@@ -1,9 +1,7 @@
 <?php require 'inc/head.php'; 
-if (isset($_SESSION['cart'])){
-    $panier = $_SESSION['cart'];
-} else {
-    $panier = null;
-}
+require 'inc/data/products.php';
+require_once 'functions.php';
+var_dump($_SESSION['cart']);
 ?>
 
 <section class="cookies container-fluid">
@@ -17,13 +15,17 @@ if (isset($_SESSION['cart'])){
                 </tr>
             </thead>
             <tbody>
-            <?php if (isset($_SESSION['cart'])){ ?>
+            <?php if (!empty($_SESSION['cart'])){ 
+                foreach ($_SESSION['cart'] as $key => $value) {
+                    $cookie = $catalog[$key];
+                ?>
                 <tr>
                     <th scope="row">#</th>
-                    <td><?php echo $panier['article'] ?></td>
-                    <td><?php echo $panier['description'] ?></td>
+                    <td><?php echo $cookie['name'] ?></td>
+                    <td><?php echo $cookie['description'] ?></td>
                 </tr>
-            <?php } ?>
+            <?php } 
+            } ?>
             </tbody>
         </table>
     </div>
