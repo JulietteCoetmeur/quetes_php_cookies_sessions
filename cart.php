@@ -1,7 +1,5 @@
 <?php require 'inc/head.php'; 
 require 'inc/data/products.php';
-require_once 'functions.php';
-var_dump($_SESSION['cart']);
 ?>
 
 <section class="cookies container-fluid">

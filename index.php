@@ -11,19 +11,6 @@ if (!empty($_GET['add_to_cart'])) {
     $cookie = $_GET['add_to_cart'];
     addArticle($cookie);
 }
-
-// $panier = null;
-// if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-//     if (!empty($_GET['article']) && !empty($_GET['description'])) {
-//         $panier = [
-//             'article' => $_GET['article'],
-//             'description' => $_GET['description']
-//         ];
-//         if ($panier) {
-//             $_SESSION['cart'] = $panier;
-//         }
-//     }
-// } 
 ?>
 
 <section class="cookies container-fluid">
