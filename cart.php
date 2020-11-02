@@ -1,5 +1,8 @@
 <?php require 'inc/head.php'; 
 require 'inc/data/products.php';
+if (empty($_SESSION['loginname'])) {
+    header('Location:login.php');
+}
 ?>
 
 <section class="cookies container-fluid">
