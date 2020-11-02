@@ -3,10 +3,6 @@ require 'inc/data/products.php';
 require 'inc/head.php'; 
 require_once 'functions.php';
 
-if (empty($_SESSION['loginname'])) {
-    header('Location:login.php');
-}
-
 if (!empty($_GET['add_to_cart'])) {
     $cookie = $_GET['add_to_cart'];
     addArticle($cookie);
